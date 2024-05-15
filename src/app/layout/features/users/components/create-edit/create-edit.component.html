@@ -1,0 +1,138 @@
+<div class="mb-2" style="width: 100%">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-md-12">
+        <label class="mb-2 label-color-primary">
+          {{ "auth.enterFullName" | translate }}
+        </label>
+        <input
+          type="text"
+          pInputText
+          formControlName="fullName"
+          placeholder="{{ 'auth.enterFullName' | translate }}"
+          style="width: 100%"
+        />
+
+        <span
+          *ngIf="form?.controls?.['fullName'] ?.dirty && form?.controls?.['fullName']?.errors"
+        >
+          <div>
+            <small
+              id="username-help"
+              class="p-error"
+              *ngIf="form?.controls?.['fullName']?.errors?.['required']"
+              >{{ "validations.required" | translate }}</small
+            >
+          </div>
+          <div>
+            <small
+              id="username-help"
+              class="p-error"
+              *ngIf="form?.controls?.['fullName']?.errors?.['fullName']"
+              >{{ "validations.fullName" | translate }}</small
+            >
+          </div>
+          <div>
+            <small
+              id="username-help"
+              class="p-error"
+              *ngIf="form?.controls?.['fullName']?.errors?.['maxlength']"
+              >{{ "validations.max" | translate : { max: 50 } }}</small
+            >
+          </div>
+        </span>
+      </div>
+      <div class="col-md-12">
+        <label class="mb-2 label-color-primary">
+          {{ "auth.enterEmailAddress" | translate }}
+        </label>
+        <input
+          type="text"
+          pInputText
+          formControlName="email"
+          placeholder="{{ 'auth.enterEmailAddress' | translate }}"
+          style="width: 100%"
+        />
+
+        <span
+          *ngIf="form?.controls?.['email'] ?.dirty && form?.controls?.['email']?.errors"
+        >
+          <div>
+            <small
+              id="username-help"
+              class="p-error"
+              *ngIf="form?.controls?.['email']?.errors?.['required']"
+              >{{ "validations.required" | translate }}</small
+            >
+          </div>
+
+          <div>
+            <small
+              id="username-help"
+              class="p-error"
+              *ngIf="form?.controls?.['email']?.errors?.['maxlength']"
+              >{{ "validations.max" | translate : { max: 80 } }}</small
+            >
+          </div>
+          <div>
+            <small
+              id="username-help"
+              class="p-error"
+              *ngIf="form?.controls?.['email']?.errors?.['pattern']"
+              >{{ "validations.email" | translate }}</small
+            >
+          </div>
+        </span>
+      </div>
+      <div class="col-md-12">
+        <label class="mb-2 label-color-primary">
+          {{ "auth.phone" | translate }}
+        </label>
+        <input
+          type="text"
+          pInputText
+          formControlName="phone"
+          placeholder="{{ 'auth.phone' | translate }}"
+          style="width: 100%"
+        />
+
+        <span
+          *ngIf="form?.controls?.['phone'] ?.dirty && form?.controls?.['phone']?.errors"
+        >
+          <div>
+            <small
+              id="username-help"
+              class="p-error"
+              *ngIf="form?.controls?.['phone']?.errors?.['required']"
+              >{{ "validations.required" | translate }}</small
+            >
+          </div>
+
+          <div>
+            <small
+              id="username-help"
+              class="p-error"
+              *ngIf="form?.controls?.['phone']?.errors?.['maxlength']"
+              >{{ "validations.max" | translate : { max: 80 } }}</small
+            >
+          </div>
+
+        </span>
+      </div>
+    </div>
+    <div class="d-flex mt-3 justify-content-between">
+      <button type="button" class="btn btn-outline-danger" (click)="cancel()">
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        [disabled]="form.invalid"
+        (click)="submit()"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

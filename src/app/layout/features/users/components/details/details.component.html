@@ -1,0 +1,89 @@
+<!-- <div class="container"> -->
+<div class="py-2">
+  <p-panel #userInfoPanel header="User Information">
+    <div class="row">
+      <div class="col-6">
+        <div class="d-flex gap-3">
+          <span><b> Name:</b></span>
+          <span>{{
+            item?.name == null
+              ? "-"
+              : item?.name.length > 20
+              ? item?.name?.slice(0, 20) + "..."
+              : item?.name
+          }}</span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="d-flex gap-3">
+          <span><b> Email:</b></span>
+          <span>{{
+            item?.email == null
+              ? "-"
+              : item?.email.length > 20
+              ? item?.email?.slice(0, 20) + "..."
+              : item?.email
+          }}</span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="d-flex gap-3">
+          <span><b> phone:</b></span>
+          <span>{{
+            item?.phone == null
+              ? "-"
+              : item?.phone.length > 20
+              ? item?.phone?.slice(0, 20) + "..."
+              : item?.phone
+          }}</span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="d-flex gap-3">
+          <span><b> website:</b></span>
+          <span>{{
+            item?.website == null
+              ? "-"
+              : item?.website.length > 20
+              ? item?.website?.slice(0, 20) + "..."
+              : item?.website
+          }}</span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="d-flex gap-3">
+          <span><b> company:</b></span>
+          <span>{{
+            item?.company.name == null
+              ? "-"
+              : item?.company.name.length > 20
+              ? item?.company.name?.slice(0, 20) + "..."
+              : item?.company.name
+          }}</span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="d-flex gap-3">
+          <span><b> address:</b></span>
+          <span>{{
+            item?.address.city == null
+              ? "-"
+              : item.address.city +
+                " " +
+                item.address.suite +
+                " " +
+                item.address.street +
+                " " +
+                item.address.zipcode
+          }}</span>
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="button" class="btn btn-primary" (click)="editUser()">
+          {{ "Edit Details" | translate }}
+        </button>
+      </div>
+    </div>
+  </p-panel>
+</div>
+<!-- </div> -->

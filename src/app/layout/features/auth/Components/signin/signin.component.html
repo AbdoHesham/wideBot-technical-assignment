@@ -1,0 +1,121 @@
+<div class="d-flex-centered">
+  <!-- <h1 class="text-4xl font-bold text-primary-500">
+    {{ "auth.welocme" | translate }}
+    <div class="text-primary-200 mt-3">{{ "auth.adminPanel" | translate }}</div>
+  </h1> -->
+  <form style="margin-top: 2.5rem" [formGroup]="form">
+    <div class="container">
+      <div class="row">
+      <div class=" d-flex justify-content-center mb-2">
+  
+        <p-selectButton 
+            [options]="stateOptions" 
+            formControlName="userType" 
+            optionLabel="label" 
+            optionValue="value"
+            styleClass="p-button-sm "
+            (onOptionClick)="onOptionClick($event)"
+            />
+            </div>
+        <div class="col-md-12">
+          <label class="mb-2 label-color-primary">
+            {{ "auth.enterEmailAddress" | translate }}
+          </label>
+          <input
+            type="text"
+            pInputText
+            formControlName="email"
+            placeholder="{{ 'auth.enterEmailAddress' | translate }}"
+            style="width: 100%"
+          />
+
+          <span
+            *ngIf="form?.controls?.['email'] ?.dirty && form?.controls?.['email']?.errors"
+          >
+            <div>
+              <small
+                id="username-help"
+                class="p-error"
+                *ngIf="form?.controls?.['email']?.errors?.['required']"
+                >{{ "auth.emailAddress" | translate }}
+                {{ "validations.isrequired" | translate }}</small
+              >
+            </div>
+            <div>
+              <small
+                id="username-help"
+                class="p-error"
+                *ngIf="form?.controls?.['email']?.errors?.['pattern']"
+                >{{ "validations.email" | translate }}</small
+              >
+            </div>
+            <div>
+              <small
+                id="username-help"
+                class="p-error"
+                *ngIf="form?.controls?.['email']?.errors?.['maxlength']"
+                >{{ "validations.max" | translate : { max: 80 } }}</small
+              >
+            </div>
+          </span>
+        </div>
+        <div class="col-md-12" style="margin-top: 1.5rem">
+          <label class="mb-2 label-color-primary">
+            {{ "auth.passwordLabel" | translate }}
+          </label>
+          <div class="p-input-icon-right d-block">
+            <i
+              [class]="!show ? 'pi pi-eye' : 'pi pi-eye-slash'"
+              (click)="show = !show"
+            ></i>
+
+            <input
+              [type]="!show ? 'password' : 'text'"
+              pInputText
+              formControlName="password"
+              placeholder="{{ 'auth.passwordLabel' | translate }}"
+              style="width: 100%"
+            />
+          </div>
+          <span
+            *ngIf="form?.controls?.['password']?.errors && form?.controls?.['password'] ?.dirty "
+          >
+            <div>
+              <small
+                id="username-help"
+                class="p-error"
+                *ngIf="form?.get('password')?.errors['required']"
+                >{{ "validations.required" | translate }}</small
+              >
+            </div>
+            <div>
+              <small
+                id="username-help"
+                class="p-error"
+                *ngIf="form?.get('password')?.errors['minlength']"
+                >{{ "validations.min" | translate : { min: 8 } }}</small
+              >
+            </div>
+            <div>
+              <small
+                id="username-help"
+                class="p-error"
+                *ngIf="form?.get('password')?.errors['maxlength']"
+                >{{ "validations.max" | translate : { max: 30 } }}</small
+              >
+            </div>
+          </span>
+        </div>
+
+        <button
+          class="mt-4 btn btn-primary"
+          styleClass="p-button-outlined p-button-sm "
+          (click)="submit()"
+          [disabled]="!form.valid"
+        >
+          <span>{{ "auth.signIn" | translate }}</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
