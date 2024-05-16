@@ -10,18 +10,16 @@
 $theme-colors: (
   "primary": $primary,
   "secondary": $secondary,
-  "light":      $basic-white,
-
+  "light": $basic-white,
 );
 body {
-
   padding: 0;
   margin: 0;
 }
 .navbar {
   // background-color: map-get($secondary, 500) !important;
   color: map-get($primary, 100) !important;
-  background-color: map-get($primary, 600)!important;
+  background-color: map-get($primary, 600) !important;
   box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(25px);
 
@@ -41,15 +39,14 @@ body {
     font-weight: bolder;
   }
 }
-.main-bg{
-  background-color: map-get($primary, 600)!important;
-
+.main-bg {
+  background-color: map-get($primary, 600) !important;
 }
 /**********************Inputs************************************/
 
-.custom-label{
+.custom-label {
   color: #6c757d;
-  
+
   font-size: 14px;
 }
 
@@ -57,7 +54,7 @@ p-inputnumber {
   width: 100%;
 
   .p-inputtext {
-    width: 100% !important
+    width: 100% !important;
   }
 }
 .p-dropdown,
@@ -117,7 +114,6 @@ input.p-inputtext:not(.inputgroup-input) {
 }
 .p-float-label > label {
   left: 0.5rem;
- 
 }
 
 .p-inputtext.ng-touched.ng-invalid,
@@ -153,20 +149,18 @@ p-inputnumber.ng-touched.ng-invalid .p-inputnumber .p-inputtext,
 // .p-radiobutton:not(.p-radiobutton-disabled) .p-radiobutton-box:hover {
 //   border-color: map-get($primary, 500) !important;
 // }
-p-checkbox + label{
+p-checkbox + label {
   margin-left: 10px;
   color: map-get($secondary, 500);
-
 }
-[dir='rtl'] p-checkbox + label{
+[dir="rtl"] p-checkbox + label {
   margin-right: 10px;
-  margin-left: unset;  
+  margin-left: unset;
 }
 .p-checkbox .p-checkbox-box {
   border-color: map-get($primary, 500) !important;
-
 }
-  .p-checkbox .p-checkbox-box.p-highlight {
+.p-checkbox .p-checkbox-box.p-highlight {
   background-color: map-get($primary, 500) !important;
   border-color: map-get($primary, 500) !important;
 }
@@ -182,7 +176,7 @@ p-checkbox + label{
 .p-radiobutton:not(.p-radiobutton-disabled) .p-radiobutton-box {
   border-color: map-get($primary, 500) !important;
 }
-.answer-box.heighlight{
+.answer-box.heighlight {
   border: 2px solid map-get($primary, 500) !important; /* Adjust the border style as desired */
 }
 
@@ -219,13 +213,12 @@ ul.p-galleria-indicators {
   //justify-content: center;
   border-radius: 10px;
 }
-.p-selectbutton .p-button.p-highlight{
+.p-selectbutton .p-button.p-highlight {
   background: map-get($primary, 500);
   border: map-get($primary, 500);
-  
 }
 .p-sidebar.p-sidebar-active {
-  background-color: map-get($primary, 600)!important;
+  background-color: map-get($primary, 600) !important;
 
   .p-sidebar-content {
     div {
@@ -251,12 +244,12 @@ ul.p-galleria-indicators {
 /*******************************scroll***/
 
 .p-scrollpanel-bar {
-    background: map-get($primary, 200 );
-    
-    opacity: 1; 
-&:focus-visible{
-  border-color: red;
-}    
+  background: map-get($primary, 200);
+
+  opacity: 1;
+  &:focus-visible {
+    border-color: red;
+  }
 }
 
 /*****************************tabs************/
@@ -268,8 +261,7 @@ ul.p-galleria-indicators {
 .p-dialog-footer {
   display: flex;
   //justify-content: space-around;
-    justify-content: end;
-
+  justify-content: end;
 }
 
 // ***************** input ********************************
@@ -282,7 +274,7 @@ p-inputnumber,
   cursor: pointer;
 }
 
-.dialog-footer{
+.dialog-footer {
   position: fixed;
   bottom: 25px;
   left: 0;
@@ -293,19 +285,23 @@ p-inputnumber,
 }
 /******************************************confirm dialog*****************/
 .p-dialog .p-dialog-footer button {
-  margin:0 10px !important;}
+  margin: 0 10px !important;
+}
 
+/******************************print******************/
 
-  /******************************print******************/
-  
 @media print {
-    .collapsed {
-      display: block !important;
-      height: auto !important;
-      overflow: visible !important;
-    }
+  .collapsed {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
   }
+}
 
-  .basic-white{
-    color: $basic-white;
-  }
+.basic-white {
+  color: $basic-white;
+}
+.p-togglebutton.p-button.p-highlight {
+  background: #324034;
+  border-color: #324034;
+}

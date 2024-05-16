@@ -64,10 +64,12 @@ export class SigninComponent implements OnInit {
       password: this.form.controls.password.value.trim(),
       userType: this.form.controls.userType.value,
     };
-    const perm = this.form.controls.userType.value == 1 ? ['ADMIN'] : ['USER'];
+    const perm = this.form.controls.userType.value == 1 ?'ADMIN' : 'USER';
+    console.log(perm);
+    localStorage.setItem('perm', JSON.stringify(perm));
     this.permissionsService.addPermission(perm);
     this.AuthService.setCurrentUser(body);
-    this.router.navigateByUrl('/users');
+    this.router.navigateByUrl('/home');
   }
   initFormValue() {
     this.form.controls.email.patchValue(

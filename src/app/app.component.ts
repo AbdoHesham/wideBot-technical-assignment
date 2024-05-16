@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NetworkService } from './shared/services/network.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { DirService } from './shared/services/dir.service';
 
 @Component({
   selector: 'app-root',
@@ -15,15 +16,11 @@ export class AppComponent {
   constructor(
     public networkService: NetworkService,
     public translate: TranslateService,
-    private permissionsService: NgxPermissionsService
+    public DirService : DirService
   ) {}
 
   ngOnInit() {
     this.initLang();
-    const perm = ['ADMIN', 'EDITOR'];
-    this.permissionsService.addPermission(perm);
-
-    this.permissionsService.loadPermissions(perm);
   }
 
   initLang() {
@@ -34,18 +31,5 @@ export class AppComponent {
     this.translate.use(this.currentLang);
   }
 
-  changeCurrentLang(lang: string) {
-    const storedLang = localStorage.getItem('currentLang');
-    if (storedLang == lang) {
-      return;
-    } else {
-      this.translate.use(lang);
-      localStorage.setItem('currentLang', lang);
-      location.reload();
-    }
-  }
-  dir() {
-    let dir = localStorage.getItem('currentLang');
-    return dir;
-  }
+
 }

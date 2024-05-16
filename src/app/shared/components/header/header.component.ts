@@ -7,7 +7,9 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +18,6 @@ import { Subject } from 'rxjs';
 })
 export class HeaderComponent {
   formGroup!: FormGroup;
-  @ViewChild('imgBrand') imgBrand: ElementRef;
   stateOptions: any[] = [
     {
       label: 'ar',
@@ -30,27 +31,34 @@ export class HeaderComponent {
     },
   ];
 
-  userInteracted = true;
-  private destroy$ = new Subject<void>();
+  constructor(
+    private router: Router,
+    private AuthService: AuthService,
+    public translate: TranslateService
+  ) {}
 
-  constructor(private router: Router) {}
-  ngAfterViewInit() {
-    window.addEventListener('click', () => {
-      this.userInteracted = true;
-    });
-  }
   ngOnInit() {
+    const storedLang = localStorage.getItem('currentLang');
+    console.log(storedLang);
+    
     this.formGroup = new FormGroup({
-      currentLang: new FormControl('en'),
+      currentLang: new FormControl(storedLang == 'ar' ? false : true),
     });
   }
-
-  getVipRequests(tab) {
-    this.router.navigateByUrl(`/vip-requests/${tab}`);
+  logout() {
+    localStorage.clear();
+    this.AuthService.login();
   }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+  changeCurrentLang(lang: any) {
+    console.log(lang);
+   lang = lang === true ? 'en' : 'ar' ;
+    const storedLang = localStorage.getItem('currentLang');
+    if (storedLang == lang) {
+      return;
+    } else {
+      this.translate.use(lang);
+      localStorage.setItem('currentLang', lang);
+      location.reload();
+    }
   }
 }

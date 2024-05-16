@@ -1,10 +1,10 @@
 <!-- <div class="container"> -->
 <div class="py-2">
-  <p-panel #userInfoPanel header="User Information">
+  <p-panel #userInfoPanel header="{{'User Information' | translate}}">
     <div class="row">
       <div class="col-6">
         <div class="d-flex gap-3">
-          <span><b> Name:</b></span>
+          <span><b> {{'Name' | translate}}:</b></span>
           <span>{{
             item?.name == null
               ? "-"
@@ -16,7 +16,7 @@
       </div>
       <div class="col-6">
         <div class="d-flex gap-3">
-          <span><b> Email:</b></span>
+          <span><b> {{'Email'| translate}}:</b></span>
           <span>{{
             item?.email == null
               ? "-"
@@ -28,7 +28,7 @@
       </div>
       <div class="col-6">
         <div class="d-flex gap-3">
-          <span><b> phone:</b></span>
+          <span><b> {{'phone'| translate}}:</b></span>
           <span>{{
             item?.phone == null
               ? "-"
@@ -40,7 +40,7 @@
       </div>
       <div class="col-6">
         <div class="d-flex gap-3">
-          <span><b> website:</b></span>
+          <span><b> {{'website'| translate}}:</b></span>
           <span>{{
             item?.website == null
               ? "-"
@@ -52,7 +52,7 @@
       </div>
       <div class="col-6">
         <div class="d-flex gap-3">
-          <span><b> company:</b></span>
+          <span><b> {{'company'| translate}}:</b></span>
           <span>{{
             item?.company.name == null
               ? "-"
@@ -64,7 +64,7 @@
       </div>
       <div class="col-6">
         <div class="d-flex gap-3">
-          <span><b> address:</b></span>
+          <span><b> {{'address'| translate}}:</b></span>
           <span>{{
             item?.address.city == null
               ? "-"

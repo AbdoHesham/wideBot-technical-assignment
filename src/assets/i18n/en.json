@@ -3,25 +3,29 @@
     "index": "Home",
     "home": "Home"
   },
-  "copyRightMessage": "year© Andalusia Wellness Park. All rights reserved",
+  "Home": "Home",
+  "Search": "Search",
+  "Add New User": "Add New User",
+  "Users Management": "Users Management",
+  "Edit Details": "Edit Details",
+  "Name": "Name",
+  "Email": "Email",
+  "phone": "phone",
+  "website": "website",
+  "company": "company",
+  "address": "address",
+  "Cancel":"Cancel",
+  "Save":"Save",
+  "User Information":"User Information",
+  "logout":"logout",
+  "View As A User":"View As A User",
+  "View As Admin":"View As Admin",
   "help": "Help",
   "termsAndConditions": "Terms & Conditions",
   "privacyPolicy": "Privacy Policy",
   "success": "Success",
   "error": "Error",
-  "investors": {
-    "investorType": "Investor Type",
-    "questionnaire": "Questionnaire",
-    "investorOnboarding": "Investor onboarding",
-    "completeOnboarding": "Complete onboarding",
-    "continue": "Continue",
-    "submit": "Submit",
-    "startQuestionnaire": "Start Questionnaire",
-    "pleaseTypeYourAnswer": "Please type your answer",
-    "youAreAllSetup": "You’re all Setup",
-    "thanksForYourTime": "Thanks for your time our team will contact you",
-    "goToMyPortfolio": "Go to My Portfolio"
-  },
+
   "auth": {
     "welocme": "Welcome to",
     "adminPanel": "VIP Admin Panel",
@@ -35,7 +39,7 @@
     "enterEmailAddress": "Enter Email Address",
     "mobileNumber": "Mobile Number",
     "passwordLabel": "Password",
-    "NewPasswordLabel":"New Password",
+    "NewPasswordLabel": "New Password",
     "rePasswordLabel": "Re-enter Password",
 
     "enterPassword": "Enter Password",
@@ -54,17 +58,17 @@
     "resendCodeLabel": "Resend OTP",
     "dontHaveAnAccount": "Don’t have an account?",
     "pleaseEnterEmailToSendCode": "Please enter email to send code",
-    "PleaseenteremailtosendVerifyLink":"Please enter email to send Verify Link",
+    "PleaseenteremailtosendVerifyLink": "Please enter email to send Verify Link",
     "iRememberedThePassword": "I remembered the password...",
     "sendCode": "Send Code",
-    "Send":"Send",
+    "Send": "Send",
     "passwordReset": "Password Reset",
-    "CreateNewPassword":"Create New Password",
+    "CreateNewPassword": "Create New Password",
     "enterTheNewPasswordThatYouWouldLikeToUse": "Enter the new password that you would like to use",
-    "WehaveVerifieyouraccountyoucannowtypeinyournewpassword":"We have Verified your account, you can now type in your new password",
+    "WehaveVerifieyouraccountyoucannowtypeinyournewpassword": "We have Verified your account, you can now type in your new password",
     "newPassword": "New Password",
     "reset": "Reset",
-    "Submit":"Submit",
+    "Submit": "Submit",
     "resendReset": "Resend reset email",
     "otpVerification": "OTP Verification",
     "codeHasBeenSent": "The four-digit activation code has been sent to the following Email Address",
@@ -79,9 +83,9 @@
       "specialChar": "Special character",
       "number": "Number",
       "min": "Min. 8 characters",
-      "max":"Max. 30 characters"
+      "max": "Max. 30 characters"
     },
-    "phone":"phone"
+    "phone": "phone"
   },
   "validations": {
     "required": "this is required",
@@ -93,24 +97,12 @@
     "number": "Must be a number",
     "password": "Password must contain at least one uppercase letter, a number and a special character",
     "terms": "Must agree to the terms and conditions",
-    "PasswordNotMatch":"The passwords are not matched", 
-    "validPasswordFormat":"Password must contain at least one uppercase letter and a number and a special character and must be at least {{min}} and {{max}} characters" 
+    "PasswordNotMatch": "The passwords are not matched",
+    "validPasswordFormat": "Password must contain at least one uppercase letter and a number and a special character and must be at least {{min}} and {{max}} characters"
+  },
 
-  },
-  "layouts": {
-    "title": "Andalusia Wellness Park"
-  },
   "labels": {
     "NameInEnglish": "Name in English",
-    "NameInArabic": "Name in Arabic",
-	"VIPIcon": "VIP Icon",
-	"UploadVIPIcon": "Upload VIP Icon",
-	"VIPIconHMIS": "VIP Icon",
-	"UploadVIPIconHMIS":"Upload VIP Icon HMIS",
-	"benifits":"Benifits",
-  "permissions":"permissions",
-  "Hospital":"Hospital"
-
-
+    "NameInArabic": "Name in Arabic"
   }
 }

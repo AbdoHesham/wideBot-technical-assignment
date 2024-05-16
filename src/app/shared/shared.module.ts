@@ -108,7 +108,7 @@ import { HeaderInterceptor } from '../core/Interceptor/header.interceptor';
 import { SharedGridComponent } from './components/shared-grid/shared-grid.component';
 import { ErrorTooltipService } from './utils/ErrorMsgs';
 import { EditorModule } from 'primeng/editor';
-import { NgxPermissionsModule, NgxPermissionsStore } from 'ngx-permissions';
+import { NgxPermissionsConfigurationStore, NgxPermissionsModule, NgxPermissionsStore, NgxRolesStore } from 'ngx-permissions';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HeaderComponent } from './components/header/header.component';
 const PrimeComponent = [
@@ -234,8 +234,8 @@ const PrimeComponent = [
       },
       isolate: false,
     }),
-    // NgxPermissionsModule.forChild(),
-    NgxPermissionsModule.forRoot(),
+    NgxPermissionsModule.forChild(),
+    // NgxPermissionsModule.forRoot(),
   ],
   exports: [
     PrimeComponent,
@@ -259,6 +259,8 @@ const PrimeComponent = [
       useClass: HeaderInterceptor,
       multi: true,
     },
+    NgxPermissionsConfigurationStore,
+    NgxRolesStore 
   ],
 })
 export class SharedModule {}

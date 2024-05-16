@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { DirService } from 'src/app/shared/services/dir.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -13,7 +14,7 @@ export class MainLayoutComponent {
   home: MenuItem | undefined;
   menuItems: MenuItem[] | undefined;
 
-  constructor() {}
+  constructor(public DirService: DirService) {}
 
   ngOnInit() {}
 

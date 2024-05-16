@@ -1,6 +1,8 @@
 
+<div [dir]="DirService.dir() == 'ar' ? 'rtl' :'ltr'">
 
-<router-outlet *ngIf="networkService.online"></router-outlet>
+    <router-outlet *ngIf="networkService.online" ></router-outlet>
+</div>
 <app-connection-lost *ngIf="!networkService.online"></app-connection-lost>
 <p-confirmDialog [style]="{ width: '50vw' }" appendTo="body" class="confirm-d"></p-confirmDialog>
 

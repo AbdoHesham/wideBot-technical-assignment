@@ -1,8 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { AlertService } from './../../../../../shared/services/alert.service';
-import {
-  InputValidation
-} from './../../../../../shared/utils/InputValidation';
+import { InputValidation } from './../../../../../shared/utils/InputValidation';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -45,12 +43,12 @@ export class CreateEditComponent {
 
   GetUserById() {
     console.log(this.data);
-    
+
     this.genericService
-    .get<User>(`users/${ this.data !== undefined ? this.data?.obj?.id : 1}`)
+      .get<User>(`users/${this.data !== undefined ? this.data?.obj?.id : 1}`)
       .subscribe((data) => {
-          this.item = data;
-          this.initForm(this.item);
+        this.item = data;
+        this.initForm(this.item);
       });
   }
 
@@ -67,11 +65,8 @@ export class CreateEditComponent {
         Validators.maxLength(200),
         Validators.pattern(InputValidation.validEmail),
       ]),
-      phone: new FormControl(data?.phone, [
-        Validators.required,
-      ]),
+      phone: new FormControl(data?.phone, [Validators.required]),
     });
-
   }
 
   submit() {
@@ -84,20 +79,20 @@ export class CreateEditComponent {
     let userDTO =
       this.data.PageType == PageType.edit
         ? { ...baseUserDTO, id: this.data.obj?.id }
-        : { ...baseUserDTO, password: this.form.get('password').value };
-
-    this.genericService
-      .post<genericResponse<any>>(
-        this.data.PageType == PageType.edit ? 'User/EditUser' : 'User/AddUser',
-        userDTO
-      )
-      .subscribe((data) => {
-        console.log(data);
-        if (data.responseCode == 1) {
-          this.AlertService.showMessage('success', data.resultMessege);
+        : { ...baseUserDTO };
+    this.data.PageType == PageType.edit
+      ? this.genericService
+          .put<any>(`users/${this.data.obj?.id}`, userDTO)
+          .subscribe((data) => {
+            console.log(data);
+            this.AlertService.showMessage('success', 'done');
+            this.dialogRef.close();
+          })
+      : this.genericService.post<any>(`users`, userDTO).subscribe((data) => {
+          console.log(data);
+          this.AlertService.showMessage('success', 'done');
           this.dialogRef.close();
-        }
-      });
+        });
   }
   cancel() {
     if (this.isformvalueChanges) {

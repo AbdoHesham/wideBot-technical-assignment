@@ -1,20 +1,20 @@
 <button
   type="button"
   class="btn btn-primary"
-  *ngxPermissionsOnly="'ADMIN'"
+  *ngIf="perms == 'ADMIN'"
   (click)="isUserView = !isUserView"
 >
   {{
     !isUserView ? ("View As A User" | translate) : ("View As Admin" | translate)
   }}
 </button>
-<div *ngxPermissionsOnly="'ADMIN'" class="mt-3">
-  <div *ngIf="!isUserView">
+<div  class="mt-3">
+  <div *ngIf="!isUserView && perms == 'ADMIN'">
     <app-list></app-list>
   </div>
 </div>
-<div *ngxPermissionsOnly="['ADMIN', 'USER']" class="mt-3">
-  <div *ngIf="isUserView">
+<div  class="mt-3">
+  <div *ngIf="isUserView && (perms == 'ADMIN' || perms == 'USER')">
     <app-details></app-details>
   </div>
 </div>

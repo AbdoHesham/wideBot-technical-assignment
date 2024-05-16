@@ -3,25 +3,28 @@
     "index": "الرئيسية",
     "home": "الرئيسية"
   },
-  "copyRightMessage": "year© أندلسية صحة بارك. جميع الحقوق محفوظة",
+  "Home": "الرئيسية",
+  "Search": "بحث",
+  "Add New User": "اضافة مستخدم جديد",
+  "Users Management": "ادارة المستخدمين",
+  "Edit Details": "تعديل التفاصيل",
+  "Name": "الاسم",
+  "Email": "الايميل",
+  "phone": "رقم الهاتف",
+  "website": "الموقع",
+  "company": "الشركة",
+  "address": "العنوان",
+  "Cancel":"الغاء",
+  "Save":"حفظ",
+  "User Information":"معلومات المستخدم",
+  "logout":"تسجيل الخروج",
+  "View As A User":"عرض منظور المتخدم",
+  "View As Admin":"عرض منظور المدير",
   "help": "المساعدة",
   "termsAndConditions": "الأحكام و الشروط",
   "privacyPolicy": "سياسة الخصوصية",
   "success": "نجاح",
   "error": "خطاً",
-  "investors": {
-    "investorType": "نوع المستثمر",
-    "questionnaire": "الاستبيان",
-    "investorOnboarding": "إعداد المستثمر",
-    "completeOnboarding": "انهاء الإعداد",
-    "continue": "المتابعة",
-    "submit": "إرسال",
-    "startQuestionnaire": "بدء الاستبيان",
-    "pleaseTypeYourAnswer": "فضلاً, اكتب الاجابة",
-    "youAreAllSetup": "تم تحديث البيانات",
-    "thanksForYourTime": "شكرا على وقتك فريقنا سيتصل بك",
-    "goToMyPortfolio": "الذهاب الى الملف الشخصي"
-  },
   "auth": {
     "theModernWayForAnyoneToInvestMoney": "الطريقة الحديثة لاستثمار المال",
     "strategiesForLongTermGrowthAndFinancialSuccess": "استراتيجيات النمو الطويل الأجل والنجاح المالي",
@@ -81,13 +84,10 @@
     "password": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل و رقم و رمز",
     "terms": "يجب الموافقة على الشروط والأحكام"
   },
-  "layouts": {
-    "title": "أندلسية صحة بارك"
-  },
+
   "labels": {
     "NameInEnglish": "Name in English",
-    "NameInArabic": "Name in Arabic",
-    "permissions":"الادوار"
+    "NameInArabic": "Name in Arabic"
 
   }
 }
