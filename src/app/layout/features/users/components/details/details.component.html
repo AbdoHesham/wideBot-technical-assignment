@@ -6,11 +6,11 @@
         <div class="d-flex gap-3">
           <span><b> {{'Name' | translate}}:</b></span>
           <span>{{
-            item?.name == null
+            item?.username == null
               ? "-"
-              : item?.name.length > 20
-              ? item?.name?.slice(0, 20) + "..."
-              : item?.name
+              : item?.username.length > 20
+              ? item?.username?.slice(0, 20) + "..."
+              : item?.username
           }}</span>
         </div>
       </div>
@@ -66,7 +66,7 @@
         <div class="d-flex gap-3">
           <span><b> {{'address'| translate}}:</b></span>
           <span>{{
-            item?.address.city == null
+            item?.address == null
               ? "-"
               : item.address.city +
                 " " +

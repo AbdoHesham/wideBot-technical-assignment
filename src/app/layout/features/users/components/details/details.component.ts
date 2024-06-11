@@ -50,5 +50,13 @@ export class DetailsComponent {
       width: '60%',
       closable: false,
     });
+    dialogRef.onClose.subscribe((data) => {
+      if (data) {
+        this.item = { ...this.item, ...data };
+      }
+
+      console.log(data);
+      // this.LoadList(); // Optionally reload the list if necessary
+    });
   }  
 }

@@ -35,9 +35,13 @@ export class CreateEditComponent {
   ) {}
   ngOnInit() {
     this.data = this.config.data;
+    console.log(this.data);
+
     this.initForm();
     if (this.data.PageType == PageType.edit) {
-      this.GetUserById();
+      this.initForm(this.data.obj);
+
+      // this.GetUserById();
     }
   }
 
@@ -54,7 +58,7 @@ export class CreateEditComponent {
 
   initForm(data?) {
     this.form = new FormGroup({
-      fullName: new FormControl(data?.name, [
+      fullName: new FormControl(data?.username, [
         Validators.required,
         Validators.maxLength(50),
         Validators.pattern(InputValidation.EnglishRegx),
@@ -65,35 +69,56 @@ export class CreateEditComponent {
         Validators.maxLength(200),
         Validators.pattern(InputValidation.validEmail),
       ]),
-      phone: new FormControl(data?.phone, [Validators.required]),
+      phone: new FormControl(data?.phone, [
+        Validators.required,
+        //Validators.pattern(InputValidation.internationalPhoneNumber), 
+        // regular expression pattern for international format if we enable it we can't update user data //
+      ]),
     });
   }
 
+  // submit() {
+  //   let baseUserDTO = {
+  //     email: this.form.get('email').value,
+
+  //     username: this.form.get('fullName').value,
+  //     phone: this.form.get('phone').value,
+  //   };
+
+  //   let userDTO =
+  //     this.data.PageType == PageType.edit
+  //       ? { ...baseUserDTO, id: this.data.obj?.id }
+  //       : { ...baseUserDTO };
+  //   this.data.PageType == PageType.edit
+  //     ?
+  //      this.genericService
+  //         .put<any>(`users/${this.data.obj?.id}`, userDTO)
+  //         .subscribe((data) => {
+  //           console.log(data);
+  //           this.AlertService.showMessage('success', 'done');
+  //           this.dialogRef.close(data);
+  //         })
+  //     : this.genericService.post<any>(`users`, userDTO).subscribe((data) => {
+  //         console.log(data);
+  //         this.AlertService.showMessage('success', 'done');
+  //         this.dialogRef.close(data);
+  //       });
+  // }
   submit() {
     let baseUserDTO = {
       email: this.form.get('email').value,
-
-      fullName: this.form.get('fullName').value,
+      username: this.form.get('fullName').value,
+      phone: this.form.get('phone').value,
     };
 
     let userDTO =
       this.data.PageType == PageType.edit
         ? { ...baseUserDTO, id: this.data.obj?.id }
-        : { ...baseUserDTO };
-    this.data.PageType == PageType.edit
-      ? this.genericService
-          .put<any>(`users/${this.data.obj?.id}`, userDTO)
-          .subscribe((data) => {
-            console.log(data);
-            this.AlertService.showMessage('success', 'done');
-            this.dialogRef.close();
-          })
-      : this.genericService.post<any>(`users`, userDTO).subscribe((data) => {
-          console.log(data);
-          this.AlertService.showMessage('success', 'done');
-          this.dialogRef.close();
-        });
+        : { ...baseUserDTO, id: Date.now() }; // Generate a temporary ID for new users
+
+    this.dialogRef.close(userDTO); // Return the updated/new user
   }
+
   cancel() {
     if (this.isformvalueChanges) {
       let cancelConfirm: DynamicDialogRef;

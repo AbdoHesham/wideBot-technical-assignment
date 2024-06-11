@@ -116,13 +116,24 @@
               >{{ "validations.max" | translate : { max: 80 } }}</small
             >
           </div>
-
+          <div>
+            <small *ngIf="form.get('phone').errors['pattern']">
+              Invalid phone number format. Examples of valid formats:
+              <ul>
+                <li>+1234567890</li>
+                <li>(123) 456-7890</li>
+                <li>123-456-7890</li>
+                <li>123.456.7890</li>
+                <li>1234567890</li>
+              </ul>
+            </small>
+          </div>
         </span>
       </div>
     </div>
     <div class="d-flex mt-3 justify-content-between">
       <button type="button" class="btn btn-outline-danger" (click)="cancel()">
-        {{'Cancel' | translate}}
+        {{ "Cancel" | translate }}
       </button>
 
       <button
@@ -131,7 +142,7 @@
         [disabled]="form.invalid"
         (click)="submit()"
       >
-        {{'Save' | translate}}
+        {{ "Save" | translate }}
       </button>
     </div>
   </form>

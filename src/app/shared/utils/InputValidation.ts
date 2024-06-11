@@ -116,6 +116,10 @@ export class InputValidation {
   static complexPassword = new RegExp(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%&'()*+,-./:;<=>?@\[\]^_`{|}~])[A-Za-z\d!#$%&'()*+,-./:;<=>?@\[\]^_`{|}~]{8,}$/
   );
+  static internationalPhoneNumber = new RegExp(
+    /^(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/
+  );
+
   
 
   static capitalSmallValidation(c: FormControl) {

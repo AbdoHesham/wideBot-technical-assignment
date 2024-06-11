@@ -24,12 +24,10 @@
       >
         {{ "Add New User" | translate }}
       </button>
-
-
   </div>
   <ng-container>
     <app-shared-grid
-      [dataList]="listItems"
+      [dataList]="displayListItems" 
       [columns]="columns"
       (Load)="onLoad($event)"
       [Menuitems]="Menuitems"

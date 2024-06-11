@@ -33,6 +33,8 @@ export class ListComponent {
   Columntypelst = Columntype;
   listItems: User[] = [];
   selectedItem: any;
+  originalListItems: User[] = []; // Original data array
+  displayListItems: User[] = []; // Array for displaying data
   constructor(
     public dialogService: DialogService,
     public messageService: MessageService,
@@ -141,20 +143,48 @@ export class ListComponent {
       .pipe(debounceTime(1000))
       .subscribe((value) => {
         this.input.search = value;
-        // this.LoadList();
-        this.listItems = this.listItems.filter(
-          (item) => item.username === value
+        // Filter displayed list based on search value
+        this.displayListItems = this.originalListItems.filter(
+          (item) => item.username.includes(value)
         );
-        console.log(this.listItems);
-        
+        console.log(this.displayListItems);
       });
   }
+
   LoadList() {
     this.genericService.get<User[]>(`users`).subscribe((response) => {
-      this.listItems = response;
+      this.originalListItems = response;
+      this.displayListItems = [...this.originalListItems]; // Copy original data to display array
       this.totalItems = response.length;
     });
   }
+
+  manage(obj?) {
+    let dialogRef: DynamicDialogRef;
+    let pageType: PageType = obj !== null ? PageType.edit : PageType.add;
+    dialogRef = this.dialogService.open(CreateEditComponent, {
+      header: pageType == PageType.add ? 'Add New User' : 'Update User',
+      data: { obj: obj, PageType: pageType },
+      width: '60%',
+      closable: false,
+    });
+    dialogRef.onClose.subscribe((data) => {
+      if (data) {
+        const existingItemIndex = this.displayListItems.findIndex(item => item.id === data.id);
+
+        if (existingItemIndex !== -1) {
+          // Update existing item
+          this.displayListItems[existingItemIndex] = { ...this.displayListItems[existingItemIndex], ...data };
+        } else {
+          // Add new item
+          this.displayListItems.push(data);
+        }
+      }
+
+      console.log(data);
+      // this.LoadList(); // Optionally reload the list if necessary
+    });
+}
 
   menuItemOpened(e: any) {
     console.log(e);
@@ -177,7 +207,7 @@ export class ListComponent {
       accept: () => {
         this.genericService.delete(`users/${id}`).subscribe((res) => {
           this.AlertService.showMessage('success', 'Deleted Successfully');
-          this.listItems = this.listItems.filter(
+          this.displayListItems = this.displayListItems.filter(
             (item) => item.id != id
           );
           dialogRef?.close();
@@ -219,19 +249,7 @@ export class ListComponent {
       },
     });
   }
-  manage(obj?) {
-    let dialogRef: DynamicDialogRef;
-    let pageType: PageType = obj !== null ? PageType.edit : PageType.add;
-    dialogRef = this.dialogService.open(CreateEditComponent, {
-      header: pageType == PageType.add ? 'Add New User' : 'Update User',
-      data: { obj: obj, PageType: pageType },
-      width: '60%',
-      closable: false,
-    });
-    dialogRef.onClose.subscribe((data) => {
-      this.LoadList();
-    });
-  }
+
   toggleMenu(menu, event) {
     menu.toggle(event);
   }
