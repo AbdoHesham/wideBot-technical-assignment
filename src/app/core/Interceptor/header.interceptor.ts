@@ -38,21 +38,21 @@ export class HeaderInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       map((evt) => {
         if (evt instanceof HttpResponse) {
-          if (evt.body.responseCode == 1) {
+          // if (evt.status == 200) {
             return evt;
-          } else {
-            if (evt?.body?.responseCode != null) {
-              window.scroll({
-                top: 0,
-                left: 0,
-                behavior: 'smooth',
-              });
+          // } else {
+          //   if (evt?.body?.responseCode != null) {
+          //     window.scroll({
+          //       top: 0,
+          //       left: 0,
+          //       behavior: 'smooth',
+          //     });
 
-              this.AlertService.showMessage('error', evt.body.resultMessege);
-              // return null;
-            }
-            return evt;
-          }
+          //     this.AlertService.showMessage('error', evt.body.resultMessege);
+          //     // return null;
+          //   }
+          //   return evt;
+          // }
         }
         return null;
       }),

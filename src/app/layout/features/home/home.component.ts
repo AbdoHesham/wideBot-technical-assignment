@@ -1,33 +1,57 @@
-import { NgxPermissionsService } from 'ngx-permissions';
-import { Component } from '@angular/core';
-import { MessageService, PrimeNGConfig} from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { FileUploadEvent } from 'primeng/fileupload';
+import { ChatService } from './chat.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface Message {
   text: string;
   sender: 'user' | 'bot';
 }
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
-  userInput: string = '';
+export class HomeComponent implements OnInit {
   messages: Message[] = [];
   uploadedFiles: any[] = [];
-  files = [];
+  formGroup: FormGroup;
 
-  totalSize : number = 0;
+  constructor(
+    private config: PrimeNGConfig,
+    private messageService: MessageService,
+    private ChatService: ChatService
+  ) {}
 
-  totalSizePercent : number = 0;
-  index: number = 0;
-  constructor(private config: PrimeNGConfig, private messageService: MessageService) {}
+  ngOnInit() {
+    this.initForm();
+    // this.ChatService.start();
+  }
+
+  initForm() {
+    this.formGroup = new FormGroup({
+      textInput: new FormControl(null, [Validators.required])
+    });
+  }
 
   sendMessage() {
-    if (this.userInput.trim()) {
-      this.messages.push({ text: this.userInput, sender: 'user' });
-      this.userInput = '';
-      this.getBotResponse();
+    if (this.formGroup.valid && this.formGroup.controls['textInput'].value.trim()) {
+      const userInput = this.formGroup.controls['textInput'].value;
+      
+      this.messages.push({ text: this.formGroup.controls['textInput'].value, sender: 'user' });
+      let body = {
+        'User Question': userInput,
+      };
+      this.ChatService.sendInbox(body).subscribe(data=>{
+        // console.log(JSON.stringify( data))
+        this.messages.push({ text: data, sender: 'bot' });
+
+      })
+
+      this.formGroup.reset(); // Reset the form
+      // this.getBotResponse();
     }
   }
 
@@ -37,49 +61,22 @@ export class HomeComponent {
     }, 1000);
   }
 
-  choose(event, callback) {
-    callback();
-}
-
-onRemoveTemplatingFile(event, file, removeFileCallback, index:any) {
-    removeFileCallback(event, index);
-    this.totalSize -= parseInt(this.formatSize(file.size));
-    this.totalSizePercent = this.totalSize / 10;
-}
-
-onClearTemplatingUpload(clear) {
-    clear();
-    this.totalSize = 0;
-    this.totalSizePercent = 0;
-}
-
-onTemplatedUpload() {
-    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
-}
-
-onSelectedFiles(event) {
-    this.files = event.currentFiles;
-    this.files.forEach((file) => {
-        this.totalSize += parseInt(this.formatSize(file.size));
-    });
-    this.totalSizePercent = this.totalSize / 10;
-}
-
-uploadEvent(callback) {
-    callback();
-}
-
-formatSize(bytes) {
-    const k = 1024;
-    const dm = 3;
-    const sizes = this.config.translation.fileSizeTypes;
-    if (bytes === 0) {
-        return `0 ${sizes[0]}`;
+  removeFile(file: any) {
+    const index = this.uploadedFiles.indexOf(file);
+    if (index >= 0) {
+      this.uploadedFiles.splice(index, 1);
     }
+  }
 
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
+  onUpload(event: FileUploadEvent) {
+    for (let file of event.files) {
 
-    return `${formattedSize} ${sizes[i]}`;
-}
+      this.uploadedFiles.push(file);
+    }
+    this.messageService.add({
+      severity: 'info',
+      summary: 'File Uploaded',
+      detail: '',
+    });
+  }
 }

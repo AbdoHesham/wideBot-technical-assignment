@@ -11,11 +11,7 @@ import {
   TranslateService,
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import {
-  HTTP_INTERCEPTORS,
-  HttpClient,
-  HttpClientModule,
-} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ConnectionLostComponent } from './components/connection-lost/connection-lost.component';
 
 import { ToastModule } from 'primeng/toast';
@@ -212,57 +208,50 @@ const PrimeComponent = [
   ImageModule,
   MessagesModule,
 ];
-@NgModule({
-  declarations: [
-    ConnectionLostComponent,
-    SharedGridComponent,
-    PageNotFoundComponent,
-    HeaderComponent,
-  ],
-  imports: [
-    CommonModule,
-    PrimeComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    JsonPipe,
-    HttpClientModule, // Ensure HttpClientModule is imported for TranslateHttpLoader
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
-        deps: [HttpClient],
-      },
-      isolate: false,
-    }),
-    NgxPermissionsModule.forChild(),
-    // NgxPermissionsModule.forRoot(),
-  ],
-  exports: [
-    PrimeComponent,
-    SharedGridComponent,
-    ConnectionLostComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    JsonPipe,
-    ConnectionLostComponent,
-    NgxPermissionsModule,
-    TranslateModule,
-    PageNotFoundComponent,
-    HeaderComponent,
-  ],
-  providers: [
-    ErrorTooltipService,
-    NgxPermissionsStore,
-    TranslateService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HeaderInterceptor,
-      multi: true,
-    },
-    NgxPermissionsConfigurationStore,
-    NgxRolesStore 
-  ],
-})
+@NgModule({ declarations: [
+        ConnectionLostComponent,
+        SharedGridComponent,
+        PageNotFoundComponent,
+        HeaderComponent,
+    ],
+    exports: [
+        PrimeComponent,
+        SharedGridComponent,
+        ConnectionLostComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        JsonPipe,
+        ConnectionLostComponent,
+        NgxPermissionsModule,
+        TranslateModule,
+        PageNotFoundComponent,
+        HeaderComponent,
+    ], imports: [CommonModule,
+        PrimeComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        JsonPipe, // Ensure HttpClientModule is imported for TranslateHttpLoader
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpTranslateLoader,
+                deps: [HttpClient],
+            },
+            isolate: false,
+        }),
+        NgxPermissionsModule.forChild()], providers: [
+        ErrorTooltipService,
+        NgxPermissionsStore,
+        TranslateService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HeaderInterceptor,
+            multi: true,
+        },
+        NgxPermissionsConfigurationStore,
+        NgxRolesStore,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class SharedModule {}
 
 // required for AOT compilation
