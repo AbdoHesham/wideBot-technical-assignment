@@ -1,14 +1,6 @@
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpErrorResponse,
-  HttpHeaders,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, map, finalize, throwError } from 'rxjs';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { catchError, tap } from 'rxjs/operators';

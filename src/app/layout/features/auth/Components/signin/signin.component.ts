@@ -20,8 +20,8 @@ import { InputValidation } from 'src/app/shared/utils/InputValidation';
 export class SigninComponent implements OnInit {
   show = false;
   stateOptions: any[] = [
-    { label: 'Login As Admin', value: 1 },
-    { label: 'Login As User', value: 2 },
+    // { label: 'Login As Admin', value: 1 },
+    // { label: 'Login As User', value: 2 },
   ];
   form: FormGroup<{
     email: FormControl<string>;
