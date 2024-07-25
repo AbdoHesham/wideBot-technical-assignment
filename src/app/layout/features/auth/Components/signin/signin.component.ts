@@ -11,6 +11,7 @@ import { GenericService } from 'src/app/shared/services/generic.service';
 import { genericResponse } from 'src/app/shared/model/genericResponse';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { InputValidation } from 'src/app/shared/utils/InputValidation';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
   selector: 'app-signin',
@@ -33,7 +34,8 @@ export class SigninComponent implements OnInit {
     private router: Router,
     private genericService: GenericService,
     public AuthService: AuthService,
-    private permissionsService: NgxPermissionsService
+    private permissionsService: NgxPermissionsService,
+    private AlertService:AlertService
   ) {}
 
   initForm() {
@@ -47,7 +49,7 @@ export class SigninComponent implements OnInit {
       ]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(3),
         Validators.maxLength(30),
         // Validators.pattern(Patterns.complexPassword),
       ]),
@@ -59,17 +61,22 @@ export class SigninComponent implements OnInit {
   }
 
   submit() {
-    let body = {
-      email: this.form.controls.email.value.trim(),
-      password: this.form.controls.password.value.trim(),
-      userType: this.form.controls.userType.value,
-    };
-    const perm = this.form.controls.userType.value == 1 ?'ADMIN' : 'USER';
-    console.log(perm);
-    localStorage.setItem('perm', JSON.stringify(perm));
-    this.permissionsService.addPermission(perm);
-    this.AuthService.setCurrentUser(body);
-    this.router.navigateByUrl('/home');
+    const emailValue = this.form.controls.email.value.trim();
+    if ((emailValue == 'admin@admin.com' || emailValue == 'user@user.com' || emailValue == 'superadmin@superadmin.com') && this.form.controls.password.value === '123'){
+
+      let body = {
+        email:emailValue,
+        password: this.form.controls.password.value.trim(),
+        userType: this.form.controls.userType.value,
+      };
+
+      this.AuthService.setCurrentUser(body);
+      this.router.navigateByUrl('/home');
+    }
+    else{
+      this.AlertService.showMessage('error', 'Error in Email or Password');
+
+    }
   }
   initFormValue() {
     this.form.controls.email.patchValue(
@@ -77,7 +84,7 @@ export class SigninComponent implements OnInit {
         ? 'admin@admin.com'
         : 'user@user.com'
     );
-    this.form.controls.password.patchValue('P@ssw0rd');
+    this.form.controls.password.patchValue('123');
   }
   onOptionClick(event: any): void {
     console.log(event);

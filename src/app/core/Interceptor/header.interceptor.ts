@@ -72,7 +72,7 @@ export class HeaderInterceptor implements HttpInterceptor {
           this.AlertService.showMessage('error', "Technical Error");
         }
         else {
-          this.AlertService.showMessage('error', error.error.resultMessege);
+          // this.AlertService.showMessage('error', error.error.resultMessege);
         }
         return throwError(error);
       })
