@@ -1,21 +1,46 @@
 <div class="chat-container">
-    <div class="messages">
-      <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}">
-        {{ message.text }}
-      </div>
+  <div class="messages">
+    <div
+      *ngFor="let message of messages"
+      [ngClass]="{
+        'user-message': message.sender === 'user',
+        'bot-message': message.sender === 'bot'
+      }"
+    >
+      {{ message.text }}
     </div>
-    <form [formGroup]="formGroup">
-      <div class="input-section">
-        <input type="text" pInputText formControlName="textInput" placeholder="Type a message..." (keydown.enter)="sendMessage()" />
-        <button pButton type="button" label="Send" (click)="sendMessage()" [disabled]="formGroup.invalid"></button>
-      </div>
-    </form>
   </div>
-  <p-fileUpload name="files[]"  [auto]="false"   (onSelect)="onUpload($event)" [multiple]="true" chooseLabel="Choose" [showUploadButton]="false"></p-fileUpload>
-  <!-- <ul>
+  <form [formGroup]="formGroup">
+    <div class="input-section">
+      <input
+        type="text"
+        pInputText
+        formControlName="textInput"
+        placeholder="Type a message..."
+        (keydown.enter)="sendMessage()"
+      />
+      <button
+        pButton
+        type="button"
+        label="Send"
+        (click)="sendMessage()"
+        [disabled]="formGroup.invalid"
+      ></button>
+    </div>
+  </form>
+</div>
+<p-fileUpload
+  name="files[]"
+  [auto]="false"
+  (onSelect)="onUpload($event)"
+  [multiple]="true"
+  chooseLabel="Choose"
+  [showUploadButton]="false"
+></p-fileUpload>
+<!-- <ul>
     <li *ngFor="let file of uploadedFiles">
       {{ file.name }}
       <button type="button" (click)="removeFile(file)">Remove</button>
     </li>
   </ul> -->
-  
+
