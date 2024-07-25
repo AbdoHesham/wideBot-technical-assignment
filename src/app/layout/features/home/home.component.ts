@@ -68,15 +68,60 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onUpload(event: FileUploadEvent) {
-    for (let file of event.files) {
 
-      this.uploadedFiles.push(file);
+  onUpload(event: any) {
+    console.log('asdasdad');
+    
+    for (let file of event.files) {
+      this.readFile(file).then(base64String => {
+        let body = {
+          'Url': base64String,
+        };
+    
+        this.ChatService.upload(body).subscribe(
+          response => {
+            this.uploadedFiles.push(file);
+            // this.messageService.add({
+            //   severity: 'info',
+            //   summary: 'File Uploaded',
+            //   detail: 'File uploaded successfully'
+            // });
+          },
+          error => {
+            this.uploadedFiles.push(file);
+
+             this.messageService.add({
+              severity: 'info',
+              summary: 'File Uploaded',
+              detail: 'File uploaded successfully'
+            });
+          }
+        );
+      }).catch(error => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'File Read Error',
+          detail: 'Failed to read file'
+        });
+      });
     }
-    this.messageService.add({
-      severity: 'info',
-      summary: 'File Uploaded',
-      detail: '',
+  }
+  
+  readFile(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader();
+      
+      reader.onload = () => {
+        resolve(reader.result.toString().split(',')[1]); // Get the base64 part of the result
+      };
+      
+      reader.onerror = error => {
+        reject(error);
+      };
+      
+      reader.readAsDataURL(file); // Read file as base64
     });
   }
+  
+  
 }

@@ -11,11 +11,11 @@
       </div>
     </form>
   </div>
-  <p-fileUpload name="files[]" url="./upload" (onUpload)="onUpload($event)" [multiple]="true" chooseLabel="Choose"></p-fileUpload>
-  <ul>
+  <p-fileUpload name="files[]"  [auto]="false"   (onSelect)="onUpload($event)" [multiple]="true" chooseLabel="Choose" [showUploadButton]="false"></p-fileUpload>
+  <!-- <ul>
     <li *ngFor="let file of uploadedFiles">
       {{ file.name }}
       <button type="button" (click)="removeFile(file)">Remove</button>
     </li>
-  </ul>
+  </ul> -->
   
