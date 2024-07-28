@@ -49,7 +49,7 @@ export class SigninComponent implements OnInit {
       ]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(8),
         Validators.maxLength(30),
         // Validators.pattern(Patterns.complexPassword),
       ]),
@@ -62,7 +62,7 @@ export class SigninComponent implements OnInit {
 
   submit() {
     const emailValue = this.form.controls.email.value.trim();
-    if ((emailValue == 'admin@admin.com' || emailValue == 'user@user.com' || emailValue == 'superadmin@superadmin.com') && this.form.controls.password.value === '123'){
+    if ((emailValue == 'ahmedallawati@omandatapark.com' || emailValue == 'hmallawati@omandatapark.com' || emailValue == 'beylasan-alruzaiqi@omandatapark.com') && this.form.controls.password.value === 'P@ssw0rd'){
 
       let body = {
         email:emailValue,
