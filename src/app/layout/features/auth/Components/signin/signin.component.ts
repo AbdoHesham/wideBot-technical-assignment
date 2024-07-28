@@ -35,19 +35,19 @@ export class SigninComponent implements OnInit {
     private genericService: GenericService,
     public AuthService: AuthService,
     private permissionsService: NgxPermissionsService,
-    private AlertService:AlertService
+    private AlertService: AlertService
   ) {}
 
   initForm() {
     this.form = this.fb.group({
       userType: new FormControl(1, [Validators.required]),
-      email: new FormControl(null, [
+      email: new FormControl('', [
         Validators.required,
         Validators.email,
         Validators.maxLength(80),
         Validators.pattern(InputValidation.validEmail),
       ]),
-      password: new FormControl(null, [
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(30),
@@ -57,37 +57,44 @@ export class SigninComponent implements OnInit {
   }
   ngOnInit() {
     this.initForm();
-    this.initFormValue();
+    // this.initFormValue();
   }
 
   submit() {
     const emailValue = this.form.controls.email.value.trim();
-    if ((emailValue == 'ahmedallawati@omandatapark.com' || emailValue == 'hmallawati@omandatapark.com' || emailValue == 'beylasan-alruzaiqi@omandatapark.com') && this.form.controls.password.value === 'P@ssw0rd'){
+    const passwordValue = this.form.controls.password.value.trim();
+    let isAuthorized = false;
 
+    switch (emailValue) {
+      case 'ahmedallawati@omandatapark.com':
+        isAuthorized = passwordValue === 'Xp4!vMq2';
+        break;
+      case 'hmallawati@omandatapark.com':
+        isAuthorized = passwordValue === 'R3$t6w!B';
+        break;
+      case 'beylasan-alruzaiqi@omandatapark.com':
+        isAuthorized = passwordValue === 'Z7!hP5g#';
+        break;
+      default:
+        isAuthorized = false;
+    }
+
+    if (isAuthorized) {
       let body = {
-        email:emailValue,
-        password: this.form.controls.password.value.trim(),
+        email: emailValue,
+        password: passwordValue,
         userType: this.form.controls.userType.value,
       };
 
       this.AuthService.setCurrentUser(body);
       this.router.navigateByUrl('/home');
-    }
-    else{
+    } else {
       this.AlertService.showMessage('error', 'Error in Email or Password');
-
     }
   }
-  initFormValue() {
-    this.form.controls.email.patchValue(
-      this.form.controls.userType.value == 1
-        ? 'admin@admin.com'
-        : 'user@user.com'
-    );
-    this.form.controls.password.patchValue('123');
-  }
+
   onOptionClick(event: any): void {
     console.log(event);
-    this.initFormValue();
+    // this.initFormValue();
   }
 }

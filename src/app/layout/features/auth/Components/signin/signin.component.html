@@ -3,7 +3,7 @@
     {{ "auth.welocme" | translate }}
     <div class="text-primary-200 mt-3">{{ "auth.adminPanel" | translate }}</div>
   </h1> -->
-  <form style="margin-top: 2.5rem" [formGroup]="form">
+  <form style="margin-top: 2.5rem" [formGroup]="form" autocomplete="off">
     <div class="container">
       <div class="row">
       <div class=" d-flex justify-content-center mb-2">
@@ -27,7 +27,8 @@
             formControlName="email"
             placeholder="{{ 'auth.enterEmailAddress' | translate }}"
             style="width: 100%"
-          />
+            autocomplete="new-email"
+            />
 
           <span
             *ngIf="form?.controls?.['email'] ?.dirty && form?.controls?.['email']?.errors"
@@ -75,7 +76,8 @@
               formControlName="password"
               placeholder="{{ 'auth.passwordLabel' | translate }}"
               style="width: 100%"
-            />
+              autocomplete="new-password"
+              />
           </div>
           <span
             *ngIf="form?.controls?.['password']?.errors && form?.controls?.['password'] ?.dirty "
